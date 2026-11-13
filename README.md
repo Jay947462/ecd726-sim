@@ -1,4 +1,2 @@
-# Nav2 URDF Setup Tutorial - Differential Drive Robot
-Tutorial code referenced in https://navigation.ros.org/setup_guides/urdf/setup_urdf.html
-
-This package implements a URDF description for a simple differential drive robot. It includes the complete urdf files, launch files, build files and rviz configuration to replicate the tutorial in the link above
+# ECD 726 Car Nav2 Simulation
+Copied from nav2 sam_bot_description and will be modified to suit our own car
