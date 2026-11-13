@@ -67,6 +67,7 @@ def generate_launch_description():
             'topic': '/robot_description',
             'entity_name': 'sam_bot',
             'z': '0.65',
+            'y': '2.50',
         }.items(),
     )
     robot_localization_node = Node(

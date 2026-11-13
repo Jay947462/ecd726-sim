@@ -110,151 +110,491 @@
       <elevation>0</elevation>
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
-    <model name='unit_box'>
-      <pose>1.51271 -0.181418 0.5 0 -0 0</pose>
-      <link name='link'>
-        <inertial>
-          <mass>1</mass>
-          <inertia>
-            <ixx>0.166667</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.166667</iyy>
-            <iyz>0</iyz>
-            <izz>0.166667</izz>
-          </inertia>
-          <pose>0 0 0 0 -0 0</pose>
-        </inertial>
-        <collision name='collision'>
-          <geometry>
-            <box>
-              <size>1 1 1</size>
-            </box>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <box>
-              <size>1 1 1</size>
-            </box>
-          </geometry>
-          <material>
-            <script>
-              <name>Gazebo/Grey</name>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-            </script>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
+    
+    <model name="ring_track">
+      <static>true</static>
+      <link name="inner_0">
+        <pose>1.500 0.000 0.25 0 0 1.571</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_1">
+        <pose>1.487 0.196 0.25 0 0 1.702</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_2">
+        <pose>1.449 0.388 0.25 0 0 1.833</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_3">
+        <pose>1.386 0.574 0.25 0 0 1.963</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_4">
+        <pose>1.299 0.750 0.25 0 0 2.094</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_5">
+        <pose>1.190 0.913 0.25 0 0 2.225</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_6">
+        <pose>1.061 1.061 0.25 0 0 2.356</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_7">
+        <pose>0.913 1.190 0.25 0 0 2.487</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_8">
+        <pose>0.750 1.299 0.25 0 0 2.618</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_9">
+        <pose>0.574 1.386 0.25 0 0 2.749</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_10">
+        <pose>0.388 1.449 0.25 0 0 2.880</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_11">
+        <pose>0.196 1.487 0.25 0 0 3.011</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_12">
+        <pose>0.000 1.500 0.25 0 0 3.142</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_13">
+        <pose>-0.196 1.487 0.25 0 0 3.272</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_14">
+        <pose>-0.388 1.449 0.25 0 0 3.403</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_15">
+        <pose>-0.574 1.386 0.25 0 0 3.534</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_16">
+        <pose>-0.750 1.299 0.25 0 0 3.665</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_17">
+        <pose>-0.913 1.190 0.25 0 0 3.796</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_18">
+        <pose>-1.061 1.061 0.25 0 0 3.927</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_19">
+        <pose>-1.190 0.913 0.25 0 0 4.058</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_20">
+        <pose>-1.299 0.750 0.25 0 0 4.189</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_21">
+        <pose>-1.386 0.574 0.25 0 0 4.320</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_22">
+        <pose>-1.449 0.388 0.25 0 0 4.451</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_23">
+        <pose>-1.487 0.196 0.25 0 0 4.581</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_24">
+        <pose>-1.500 0.000 0.25 0 0 4.712</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_25">
+        <pose>-1.487 -0.196 0.25 0 0 4.843</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_26">
+        <pose>-1.449 -0.388 0.25 0 0 4.974</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_27">
+        <pose>-1.386 -0.574 0.25 0 0 5.105</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_28">
+        <pose>-1.299 -0.750 0.25 0 0 5.236</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_29">
+        <pose>-1.190 -0.913 0.25 0 0 5.367</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_30">
+        <pose>-1.061 -1.061 0.25 0 0 5.498</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_31">
+        <pose>-0.913 -1.190 0.25 0 0 5.629</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_32">
+        <pose>-0.750 -1.299 0.25 0 0 5.760</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_33">
+        <pose>-0.574 -1.386 0.25 0 0 5.890</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_34">
+        <pose>-0.388 -1.449 0.25 0 0 6.021</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_35">
+        <pose>-0.196 -1.487 0.25 0 0 6.152</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_36">
+        <pose>-0.000 -1.500 0.25 0 0 6.283</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_37">
+        <pose>0.196 -1.487 0.25 0 0 6.414</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_38">
+        <pose>0.388 -1.449 0.25 0 0 6.545</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_39">
+        <pose>0.574 -1.386 0.25 0 0 6.676</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_40">
+        <pose>0.750 -1.299 0.25 0 0 6.807</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_41">
+        <pose>0.913 -1.190 0.25 0 0 6.938</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_42">
+        <pose>1.061 -1.061 0.25 0 0 7.069</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_43">
+        <pose>1.190 -0.913 0.25 0 0 7.199</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_44">
+        <pose>1.299 -0.750 0.25 0 0 7.330</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_45">
+        <pose>1.386 -0.574 0.25 0 0 7.461</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_46">
+        <pose>1.449 -0.388 0.25 0 0 7.592</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="inner_47">
+        <pose>1.487 -0.196 0.25 0 0 7.723</pose>
+        <collision name="c"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.206 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_0">
+        <pose>3.000 0.000 0.25 0 0 1.571</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_1">
+        <pose>2.974 0.392 0.25 0 0 1.702</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_2">
+        <pose>2.898 0.776 0.25 0 0 1.833</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_3">
+        <pose>2.772 1.148 0.25 0 0 1.963</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_4">
+        <pose>2.598 1.500 0.25 0 0 2.094</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_5">
+        <pose>2.380 1.826 0.25 0 0 2.225</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_6">
+        <pose>2.121 2.121 0.25 0 0 2.356</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_7">
+        <pose>1.826 2.380 0.25 0 0 2.487</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_8">
+        <pose>1.500 2.598 0.25 0 0 2.618</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_9">
+        <pose>1.148 2.772 0.25 0 0 2.749</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_10">
+        <pose>0.776 2.898 0.25 0 0 2.880</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_11">
+        <pose>0.392 2.974 0.25 0 0 3.011</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_12">
+        <pose>0.000 3.000 0.25 0 0 3.142</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_13">
+        <pose>-0.392 2.974 0.25 0 0 3.272</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_14">
+        <pose>-0.776 2.898 0.25 0 0 3.403</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_15">
+        <pose>-1.148 2.772 0.25 0 0 3.534</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_16">
+        <pose>-1.500 2.598 0.25 0 0 3.665</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_17">
+        <pose>-1.826 2.380 0.25 0 0 3.796</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_18">
+        <pose>-2.121 2.121 0.25 0 0 3.927</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_19">
+        <pose>-2.380 1.826 0.25 0 0 4.058</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_20">
+        <pose>-2.598 1.500 0.25 0 0 4.189</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_21">
+        <pose>-2.772 1.148 0.25 0 0 4.320</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_22">
+        <pose>-2.898 0.776 0.25 0 0 4.451</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_23">
+        <pose>-2.974 0.392 0.25 0 0 4.581</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_24">
+        <pose>-3.000 0.000 0.25 0 0 4.712</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_25">
+        <pose>-2.974 -0.392 0.25 0 0 4.843</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_26">
+        <pose>-2.898 -0.776 0.25 0 0 4.974</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_27">
+        <pose>-2.772 -1.148 0.25 0 0 5.105</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_28">
+        <pose>-2.598 -1.500 0.25 0 0 5.236</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_29">
+        <pose>-2.380 -1.826 0.25 0 0 5.367</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_30">
+        <pose>-2.121 -2.121 0.25 0 0 5.498</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_31">
+        <pose>-1.826 -2.380 0.25 0 0 5.629</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_32">
+        <pose>-1.500 -2.598 0.25 0 0 5.760</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_33">
+        <pose>-1.148 -2.772 0.25 0 0 5.890</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_34">
+        <pose>-0.776 -2.898 0.25 0 0 6.021</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_35">
+        <pose>-0.392 -2.974 0.25 0 0 6.152</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_36">
+        <pose>-0.000 -3.000 0.25 0 0 6.283</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_37">
+        <pose>0.392 -2.974 0.25 0 0 6.414</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_38">
+        <pose>0.776 -2.898 0.25 0 0 6.545</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_39">
+        <pose>1.148 -2.772 0.25 0 0 6.676</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_40">
+        <pose>1.500 -2.598 0.25 0 0 6.807</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_41">
+        <pose>1.826 -2.380 0.25 0 0 6.938</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_42">
+        <pose>2.121 -2.121 0.25 0 0 7.069</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_43">
+        <pose>2.380 -1.826 0.25 0 0 7.199</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_44">
+        <pose>2.598 -1.500 0.25 0 0 7.330</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_45">
+        <pose>2.772 -1.148 0.25 0 0 7.461</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_46">
+        <pose>2.898 -0.776 0.25 0 0 7.592</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
+      </link>
+      <link name="outer_47">
+        <pose>2.974 -0.392 0.25 0 0 7.723</pose>
+        <collision name="c"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.412 0.1 0.5</size></box></geometry></visual>
       </link>
     </model>
-    <model name='unit_sphere'>
-      <pose>-1.89496 2.36764 0.5 0 -0 0</pose>
-      <link name='link'>
-        <inertial>
-          <mass>1</mass>
-          <inertia>
-            <ixx>0.1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.1</iyy>
-            <iyz>0</iyz>
-            <izz>0.1</izz>
-          </inertia>
-          <pose>0 0 0 0 -0 0</pose>
-        </inertial>
-        <collision name='collision'>
-          <geometry>
-            <sphere>
-              <radius>0.5</radius>
-            </sphere>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <sphere>
-              <radius>0.5</radius>
-            </sphere>
-          </geometry>
-          <material>
-            <script>
-              <name>Gazebo/Grey</name>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-            </script>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-    </model>
-    <state world_name='default'>
-      <sim_time>0 0</sim_time>
-      <real_time>0 0</real_time>
-      <wall_time>1626668720 808592627</wall_time>
-      <iterations>0</iterations>
-      <model name='ground_plane'>
-        <pose>0 0 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose>0 0 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='unit_box'>
-        <pose>1.51272 -0.181418 0.499995 0 1e-05 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose>1.51272 -0.181418 0.499995 0 1e-05 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0.010615 -0.006191 -9.78231 0.012424 0.021225 1.8e-05</acceleration>
-          <wrench>0.010615 -0.006191 -9.78231 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='unit_sphere'>
-        <pose>-0.725833 1.36206 0.5 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose>-0.944955 1.09802 0.5 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <light name='sun'>
-        <pose>0 0 10 0 -0 0</pose>
-      </light>
-    </state>
+
     <gui fullscreen='0'>
       <camera name='user_camera'>
         <pose>3.17226 -5.10401 6.58845 0 0.739643 2.19219</pose>
