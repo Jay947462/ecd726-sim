@@ -293,8 +293,8 @@
       <wheel_base>${2*wheel_xoff}</wheel_base>
       <wheel_separation>${base_width + 2*wheel_ygap}</wheel_separation>
       <wheel_radius>${wheel_radius}</wheel_radius>
-      <min_velocity>-1.0</min_velocity>
-      <max_velocity>1.0</max_velocity>
+      <min_velocity>-10.0</min_velocity>
+      <max_velocity>10.0</max_velocity>
       <min_acceleration>-3.0</min_acceleration>
       <max_acceleration>3.0</max_acceleration>
       <topic>/demo/cmd_vel</topic>
