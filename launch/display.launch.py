@@ -30,6 +30,7 @@ def generate_launch_description():
         name='rviz2',
         output='screen',
         arguments=['-d', LaunchConfiguration('rvizconfig')],
+        parameters=[{'use_sim_time': True}],
     )
     gz_server = GzServer(
         world_sdf_file=world_path,
@@ -67,7 +68,7 @@ def generate_launch_description():
             'topic': '/robot_description',
             'entity_name': 'sam_bot',
             'z': '0.65',
-            'y': '2.50',
+            'y': '2.0',
         }.items(),
     )
     robot_localization_node = Node(
