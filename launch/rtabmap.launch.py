@@ -22,8 +22,8 @@ def generate_launch_description():
         # RTAB-Map's own parameters are strings:
         'Reg/Strategy': '1',            # ICP (lidar scan matching)
         'Reg/Force3DoF': 'true',        # 2D: x, y, yaw only
-        # 'RGBD/NeighborLinkRefining': 'true',
-        # 'RGBD/ProximityBySpace': 'true',
+        'RGBD/NeighborLinkRefining': 'true',
+        'RGBD/ProximityBySpace': 'true',
         # 'RGBD/LinearUpdate': '0.05',
         # 'RGBD/AngularUpdate': '0.05',
         'Grid/Sensor': '0',             # build the grid from the laser scan
