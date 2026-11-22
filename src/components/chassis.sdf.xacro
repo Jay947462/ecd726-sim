@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf xmlns:xacro="http://www.ros.org/wiki/xacro" version="1.8">
+  <!-- Chassis / FlatNose decks -->
+  <xacro:macro name="chassis" params="">
+    <link name="base_link">
+      <must_be_base_link>true</must_be_base_link>
+      <visual name="slash_chassis_pan">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>${base_length} ${base_width} ${base_height}</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.078 0.091 0.111 1</ambient>
+          <diffuse>0.12 0.14 0.17 1</diffuse>
+        </material>
+      </visual>
+      <visual name="slash_left_side_rail">
+        <pose>0 .077 .021 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.365 .012 .035</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.039 0.042 0.045 1</ambient>
+          <diffuse>0.06 0.064 0.069 1</diffuse>
+        </material>
+      </visual>
+      <visual name="slash_right_side_rail">
+        <pose>0 -.077 .021 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.365 .012 .035</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.039 0.042 0.045 1</ambient>
+          <diffuse>0.06 0.064 0.069 1</diffuse>
+        </material>
+      </visual>
+      <visual name="front_suspension_crossmember">
+        <pose>.171 0 -.012 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.033 .215 .017</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.117 0.13 0.15 1</ambient>
+          <diffuse>0.18 0.2 0.23 1</diffuse>
+        </material>
+      </visual>
+      <visual name="front_shock_tower">
+        <pose>.171 0 .047 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.014 .146 .042</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.117 0.13 0.15 1</ambient>
+          <diffuse>0.18 0.2 0.23 1</diffuse>
+        </material>
+      </visual>
+      <visual name="rear_suspension_crossmember">
+        <pose>-.171 0 -.012 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.033 .215 .017</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.117 0.13 0.15 1</ambient>
+          <diffuse>0.18 0.2 0.23 1</diffuse>
+        </material>
+      </visual>
+      <visual name="rear_shock_tower">
+        <pose>-.171 0 .047 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.014 .146 .042</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.117 0.13 0.15 1</ambient>
+          <diffuse>0.18 0.2 0.23 1</diffuse>
+        </material>
+      </visual>
+      <visual name="front_bumper">
+        <pose>.259 0 -.017 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.018 .248 .022</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.039 0.042 0.045 1</ambient>
+          <diffuse>0.06 0.064 0.069 1</diffuse>
+        </material>
+      </visual>
+      <visual name="rear_bumper">
+        <pose>-.259 0 -.017 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.018 .248 .022</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.039 0.042 0.045 1</ambient>
+          <diffuse>0.06 0.064 0.069 1</diffuse>
+        </material>
+      </visual>
+      <visual name="front_bumper_arm_left">
+        <pose>.242 .080 -.017 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.045 .014 .018</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.039 0.042 0.045 1</ambient>
+          <diffuse>0.06 0.064 0.069 1</diffuse>
+        </material>
+      </visual>
+      <visual name="front_bumper_arm_right">
+        <pose>.242 -.080 -.017 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.045 .014 .018</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.039 0.042 0.045 1</ambient>
+          <diffuse>0.06 0.064 0.069 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_lower_delrin_deck">
+        <pose>0 0 ${lower_deck_z} 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>${lower_deck_length} ${lower_deck_width} ${deck_thickness}</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.052 0.053 0.057 1</ambient>
+          <diffuse>0.08 0.082 0.087 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_lower_deck_edge_left">
+        <pose>0 ${lower_deck_width/2 - 0.003} ${lower_deck_z+deck_thickness/2+0.0004} 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>${lower_deck_length-.030} 0.0025 0.0008</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.075 0.078 0.085 1</ambient>
+          <diffuse>0.115 0.12 0.13 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_lower_deck_edge_right">
+        <pose>0 ${-(lower_deck_width/2 - 0.003)} ${lower_deck_z+deck_thickness/2+0.0004} 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>${lower_deck_length-.030} 0.0025 0.0008</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.075 0.078 0.085 1</ambient>
+          <diffuse>0.115 0.12 0.13 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_upper_deck_longitudinal_left">
+        <pose>${upper_deck_x} ${(upper_deck_width-.013)/2} ${upper_deck_z} 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>${upper_deck_length} .013 ${deck_thickness}</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.052 0.053 0.057 1</ambient>
+          <diffuse>0.08 0.082 0.087 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_upper_deck_longitudinal_right">
+        <pose>${upper_deck_x} ${-(upper_deck_width-.013)/2} ${upper_deck_z} 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>${upper_deck_length} .013 ${deck_thickness}</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.052 0.053 0.057 1</ambient>
+          <diffuse>0.08 0.082 0.087 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_upper_deck_crossbar_front">
+        <pose>${upper_deck_x+upper_deck_length/2-.012} 0 ${upper_deck_z} 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.024 ${upper_deck_width} ${deck_thickness}</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.052 0.053 0.057 1</ambient>
+          <diffuse>0.08 0.082 0.087 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_upper_deck_crossbar_rear">
+        <pose>${upper_deck_x-upper_deck_length/2+.012} 0 ${upper_deck_z} 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.024 ${upper_deck_width} ${deck_thickness}</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.052 0.053 0.057 1</ambient>
+          <diffuse>0.08 0.082 0.087 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_upper_deck_crossbar_middle_rear">
+        <pose>${upper_deck_x-.055} 0 ${upper_deck_z} 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.022 ${upper_deck_width} ${deck_thickness}</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.052 0.053 0.057 1</ambient>
+          <diffuse>0.08 0.082 0.087 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_upper_deck_crossbar_middle_front">
+        <pose>${upper_deck_x+.055} 0 ${upper_deck_z} 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.022 ${upper_deck_width} ${deck_thickness}</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.052 0.053 0.057 1</ambient>
+          <diffuse>0.08 0.082 0.087 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_upper_deck_diagonal_front_left">
+        <pose>${upper_deck_x+.105} 0.029 ${upper_deck_z} 0 0 0.70</pose>
+        <geometry>
+          <box>
+            <size>.078 .007 ${deck_thickness}</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.052 0.053 0.057 1</ambient>
+          <diffuse>0.08 0.082 0.087 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_upper_deck_diagonal_front_right">
+        <pose>${upper_deck_x+.105} -.029 ${upper_deck_z} 0 0 -0.70</pose>
+        <geometry>
+          <box>
+            <size>.078 .007 ${deck_thickness}</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.052 0.053 0.057 1</ambient>
+          <diffuse>0.08 0.082 0.087 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_upper_deck_diagonal_rear_left">
+        <pose>${upper_deck_x-.108} 0.029 ${upper_deck_z} 0 0 -0.70</pose>
+        <geometry>
+          <box>
+            <size>.078 .007 ${deck_thickness}</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.052 0.053 0.057 1</ambient>
+          <diffuse>0.08 0.082 0.087 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_upper_deck_diagonal_rear_right">
+        <pose>${upper_deck_x-.108} -.029 ${upper_deck_z} 0 0 0.70</pose>
+        <geometry>
+          <box>
+            <size>.078 .007 ${deck_thickness}</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.052 0.053 0.057 1</ambient>
+          <diffuse>0.08 0.082 0.087 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_standoff_front_left">
+        <pose>.112 .053 ${(upper_deck_z+lower_deck_z)/2} 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>.0048</radius>
+            <length>${upper_deck_z-lower_deck_z-deck_thickness}</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.293 0.305 0.319 1</ambient>
+          <diffuse>0.45 0.47 0.49 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_standoff_bolt_front_left">
+        <pose>.112 .053 ${upper_deck_z+deck_thickness/2+.001} 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>.0059</radius>
+            <length>.002</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.293 0.305 0.319 1</ambient>
+          <diffuse>0.45 0.47 0.49 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_standoff_front_right">
+        <pose>.112 -.053 ${(upper_deck_z+lower_deck_z)/2} 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>.0048</radius>
+            <length>${upper_deck_z-lower_deck_z-deck_thickness}</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.293 0.305 0.319 1</ambient>
+          <diffuse>0.45 0.47 0.49 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_standoff_bolt_front_right">
+        <pose>.112 -.053 ${upper_deck_z+deck_thickness/2+.001} 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>.0059</radius>
+            <length>.002</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.293 0.305 0.319 1</ambient>
+          <diffuse>0.45 0.47 0.49 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_standoff_rear_left">
+        <pose>-.138 .053 ${(upper_deck_z+lower_deck_z)/2} 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>.0048</radius>
+            <length>${upper_deck_z-lower_deck_z-deck_thickness}</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.293 0.305 0.319 1</ambient>
+          <diffuse>0.45 0.47 0.49 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_standoff_bolt_rear_left">
+        <pose>-.138 .053 ${upper_deck_z+deck_thickness/2+.001} 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>.0059</radius>
+            <length>.002</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.293 0.305 0.319 1</ambient>
+          <diffuse>0.45 0.47 0.49 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_standoff_rear_right">
+        <pose>-.138 -.053 ${(upper_deck_z+lower_deck_z)/2} 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>.0048</radius>
+            <length>${upper_deck_z-lower_deck_z-deck_thickness}</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.293 0.305 0.319 1</ambient>
+          <diffuse>0.45 0.47 0.49 1</diffuse>
+        </material>
+      </visual>
+      <visual name="flatnose_standoff_bolt_rear_right">
+        <pose>-.138 -.053 ${upper_deck_z+deck_thickness/2+.001} 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>.0059</radius>
+            <length>.002</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.293 0.305 0.319 1</ambient>
+          <diffuse>0.45 0.47 0.49 1</diffuse>
+        </material>
+      </visual>
+      <visual name="jetson_orin_nano_carrier">
+        <pose>-.032 0 .033 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.105 .080 .004</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.046 0.085 0.078 1</ambient>
+          <diffuse>0.07 0.13 0.12 1</diffuse>
+        </material>
+      </visual>
+      <visual name="jetson_orin_nano_body">
+        <pose>-.032 0 .041 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.100 .073 .016</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.104 0.137 0.143 1</ambient>
+          <diffuse>0.16 0.21 0.22 1</diffuse>
+        </material>
+      </visual>
+      <visual name="jetson_fan_rail_left">
+        <pose>-.032 .024 .050 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.073 .008 .004</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.182 0.195 0.208 1</ambient>
+          <diffuse>0.28 0.3 0.32 1</diffuse>
+        </material>
+      </visual>
+      <visual name="jetson_fan_rail_right">
+        <pose>-.032 -.024 .050 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.073 .008 .004</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.182 0.195 0.208 1</ambient>
+          <diffuse>0.28 0.3 0.32 1</diffuse>
+        </material>
+      </visual>
+      <visual name="vesc_controller_body">
+        <pose>-.127 -.041 .034 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.066 .027 .012</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.085 0.104 0.124 1</ambient>
+          <diffuse>0.13 0.16 0.19 1</diffuse>
+        </material>
+      </visual>
+      <visual name="usb_hub">
+        <pose>-.128 .040 .034 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.055 .026 .013</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.117 0.13 0.15 1</ambient>
+          <diffuse>0.18 0.2 0.23 1</diffuse>
+        </material>
+      </visual>
+      <visual name="hokuyo_custom_adapter_plate">
+        <pose>${lidar_x} 0 .023 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.065 .064 .004</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.293 0.305 0.319 1</ambient>
+          <diffuse>0.45 0.47 0.49 1</diffuse>
+        </material>
+      </visual>
+      <visual name="d435_front_camera_tab">
+        <pose>${camera_x-.015} 0 .033 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.063 .057 .005</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.293 0.305 0.319 1</ambient>
+          <diffuse>0.45 0.47 0.49 1</diffuse>
+        </material>
+      </visual>
+      <visual name="d435_camera_bracket">
+        <pose>${camera_x-.020} 0 .043 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.012 .030 .018</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.117 0.13 0.15 1</ambient>
+          <diffuse>0.18 0.2 0.23 1</diffuse>
+        </material>
+      </visual>
+      <collision name="base_link_collision">
+        <geometry>
+          <box>
+            <size>
+            ${base_length} ${base_width} ${base_height}
+          </size>
+          </box>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Robot Footprint -->
+    <link name="base_footprint">
+      <pose relative_to="base_joint"/>
+      <xacro:box_inertia m="15" w="${base_width}" d="${base_length}" h="${base_height}"/>
+    </link>
+    <joint name="base_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>base_footprint</child>
+      <pose relative_to="base_link">0.0 0.0 ${-(wheel_radius+wheel_zoff)} 0 0 0</pose>
+    </joint>
+  </xacro:macro>
+</sdf>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf xmlns:xacro="http://www.ros.org/wiki/xacro" version="1.8">
+  <!-- Shared measured/estimated geometry and mounting positions (meters). -->
+    <xacro:property name="base_width" value="0.1778"/>
+    <xacro:property name="base_length" value="0.485775"/>
+    <xacro:property name="base_height" value="0.035"/>
+    <xacro:property name="wheel_radius" value="0.0523875"/>
+    <xacro:property name="wheel_width" value="0.041275"/>
+    <xacro:property name="wheel_ygap" value="0.03413125"/>
+    <xacro:property name="wheel_zoff" value="0.0413125"/>
+    <xacro:property name="wheel_xoff" value="0.1651"/>
+    <xacro:property name="vehicle_length" value="0.536575"/>
+    <xacro:property name="lidar_x" value="0.1762125"/>
+    <xacro:property name="lidar_scan_height" value="0.1755"/>
+    <xacro:property name="camera_x" value="0.215"/>
+    <xacro:property name="camera_height" value="0.1437"/>
+    <xacro:property name="lower_deck_length" value="0.381"/>
+    <xacro:property name="lower_deck_width" value="0.1778"/>
+    <xacro:property name="upper_deck_length" value="0.3302"/>
+    <xacro:property name="upper_deck_width" value="0.1397"/>
+    <xacro:property name="deck_thickness" value="0.0049022"/>
+    <xacro:property name="lower_deck_z" value="0.02425"/>
+    <xacro:property name="upper_deck_z" value="0.0623"/>
+    <xacro:property name="upper_deck_x" value="-0.014"/>
+  <xacro:property name="max_steer" value="0.6"/>
+
+  <!-- Shared inertial macros. -->
+    <xacro:macro name="box_inertia" params="m w h d">
+      <inertial>
+        <pose>0 0 0 ${pi/2} 0 ${pi/2}</pose>
+        <mass>${m}</mass>
+        <inertia>
+          <ixx>${(m/12) * (h*h + d*d)}</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>${(m/12) * (w*w + d*d)}</iyy>
+          <iyz>0.0</iyz>
+          <izz>${(m/12) * (w*w + h*h)}</izz>
+        </inertia>
+      </inertial>
+    </xacro:macro>
+    <xacro:macro name="cylinder_inertia" params="m r h">
+      <inertial>
+        <pose>0 0 0 ${pi/2} 0 0</pose>
+        <mass>${m}</mass>
+        <inertia>
+          <ixx>${(m/12) * (3*r*r + h*h)}</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>${(m/12) * (3*r*r + h*h)}</iyy>
+          <iyz>0.0</iyz>
+          <izz>${(m/2) * (r*r)}</izz>
+        </inertia>
+      </inertial>
+    </xacro:macro>
+    <xacro:macro name="sphere_inertia" params="m r">
+      <inertial>
+        <mass>${m}</mass>
+        <inertia>
+          <ixx>${(2/5) * m * (r*r)}</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>${(2/5) * m * (r*r)}</iyy>
+          <iyz>0.0</iyz>
+          <izz>${(2/5) * m * (r*r)}</izz>
+        </inertia>
+      </inertial>
+    </xacro:macro>
+</sdf>

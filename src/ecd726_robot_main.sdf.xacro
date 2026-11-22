@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf xmlns:xacro="http://www.ros.org/wiki/xacro" version="1.8">
+  <!-- Shared properties and inertia macros -->
+  <xacro:include filename="components/shared.sdf.xacro"/>
+
+  <!-- Component definitions -->
+  <xacro:include filename="components/chassis.sdf.xacro"/>
+  <xacro:include filename="components/wheels.sdf.xacro"/>
+  <xacro:include filename="components/lidar.sdf.xacro"/>
+  <xacro:include filename="components/d435i.sdf.xacro"/>
+  <xacro:include filename="components/imu.sdf.xacro"/>
+
+  <model name="ecd726_bot" canonical_link="base_link">
+    <xacro:chassis/>
+    <xacro:wheels/>
+    <xacro:lidar/>
+    <xacro:d435i/>
+    <xacro:imu/>
+  </model>
+</sdf>

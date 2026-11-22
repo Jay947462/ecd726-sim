@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(sam_bot_description)
+project(ecd726_description)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -23,7 +23,7 @@ find_package(xacro REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 install(
-  DIRECTORY src launch rviz config world
+  DIRECTORY src launch rviz config world meshes
   DESTINATION share/${PROJECT_NAME}
 )
 
