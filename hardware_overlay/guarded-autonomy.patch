@@ -1,0 +1,150 @@
+--- a/src/car_drive/launch/drive.launch.py
++++ b/src/car_drive/launch/drive.launch.py
+@@ -10,4 +10,5 @@
+
+ from car_drive.guard import DriveGuard
++from car_drive.autonomy_node import load_autonomy_config
+ from car_drive.steering_guard import SteeringGuard
+
+@@ -29,6 +30,18 @@
+         'max_erpm', 'max_reverse_erpm', 'command_timeout', 'telemetry_timeout')}
+     DriveGuard(**limits)  # Validate before launching either process.
++    autonomy_path = value('autonomy_config')
++    drive_remaps = []
++    steering_remaps = []
++    if autonomy_path:
++        if not steering or calibration_text != 'true':
++            raise ValueError('Autonomy requires enabled, calibrated steering')
++        if limits['max_erpm'] <= 0.0 or limits['max_reverse_erpm'] != 0.0:
++            raise ValueError('Autonomy requires a tested forward ERPM cap and zero reverse ERPM')
++        autonomy_params = load_autonomy_config(autonomy_path)
++        drive_remaps = [('/drive/command_erpm', '/autonomy/guarded_erpm')]
++        steering_remaps = [('/steering/command', '/autonomy/guarded_steering')]
+     guard = Node(package='car_drive', executable='drive_node', name='drive_node',
+-                 output='screen', parameters=[{'preview': preview, **limits}])
++                 output='screen', parameters=[{'preview': preview, **limits}],
++                 remappings=drive_remaps)
+     nodes = [guard]
+     steering_params = None
+@@ -45,5 +58,10 @@
+         nodes.append(Node(package='car_drive', executable='steering_node',
+                           name='steering_node', output='screen',
+-                          parameters=[{'preview': preview, **steering_params}]))
++                          parameters=[{'preview': preview, **steering_params}],
++                          remappings=steering_remaps))
++    if autonomy_path:
++        nodes.append(Node(package='car_drive', executable='autonomy_node',
++                          name='autonomy_node', output='screen',
++                          parameters=[autonomy_params]))
+     if not preview:
+         port = value('port')
+@@ -98,4 +116,5 @@
+         DeclareLaunchArgument('command_timeout', default_value='0.5'),
+         DeclareLaunchArgument('telemetry_timeout', default_value='1.0'),
++        DeclareLaunchArgument('autonomy_config', default_value=''),
+         OpaqueFunction(function=start),
+     ])
+--- a/src/car_drive/setup.py
++++ b/src/car_drive/setup.py
+@@ -24,4 +24,5 @@
+         'steering_node = car_drive.steering_node:main',
+         'manual_node = car_drive.manual_node:main',
++        'autonomy_node = car_drive.autonomy_node:main',
+     ]},
+ )
+--- a/src/car_drive/package.xml
++++ b/src/car_drive/package.xml
+@@ -12,4 +12,7 @@
+   <exec_depend>std_srvs</exec_depend>
+   <exec_depend>geometry_msgs</exec_depend>
++  <exec_depend>nav_msgs</exec_depend>
++  <exec_depend>sensor_msgs</exec_depend>
++  <exec_depend>python3-yaml</exec_depend>
+   <exec_depend>foxglove_bridge</exec_depend>
+   <exec_depend>launch</exec_depend>
+--- a/tools/start_steering.sh
++++ b/tools/start_steering.sh
+@@ -1,4 +1,4 @@
+ #!/usr/bin/env bash
+-# Steering-only session: preview by default, explicit hardware mode, motor limits zero.
++# Guarded steering session: preview by default, explicit hardware mode, motor limits zero.
+ set -euo pipefail
+
+@@ -18,4 +18,35 @@
+ max_erpm=${STEERING_MAX_ERPM:-0.0}
+ max_reverse_erpm=${STEERING_MAX_REVERSE_ERPM:-0.0}
++autonomy_config=${STEERING_AUTONOMY_CONFIG:-}
++if [[ -n "$autonomy_config" ]]; then
++    if [[ "$dashboard" == true ]]; then
++        echo 'Close the manual dashboard before starting autonomy.' >&2
++        exit 2
++    fi
++    autonomy_config=$(python3 - "$workspace" "$autonomy_config" "$max_erpm" "$max_reverse_erpm" <<'PY'
++import math
++import sys
++from pathlib import Path
++
++workspace, path, forward_limit, reverse_limit = sys.argv[1:]
++try:
++    forward = float(forward_limit)
++    reverse = float(reverse_limit)
++    if not (math.isfinite(forward) and forward > 0.0 and reverse == 0.0):
++        raise ValueError('Set a tested positive STEERING_MAX_ERPM and leave reverse disabled')
++    root = Path(workspace).resolve(strict=True)
++    relative = Path(path)
++    if relative.is_absolute():
++        raise ValueError('STEERING_AUTONOMY_CONFIG must be a workspace-relative path')
++    config = (root / relative).resolve(strict=True)
++    relative = config.relative_to(root)
++    if not config.is_file():
++        raise ValueError('STEERING_AUTONOMY_CONFIG must name a parameter file')
++except (OSError, RuntimeError, ValueError) as error:
++    sys.exit(str(error))
++print(Path('/ros2_ws') / relative)
++PY
++    ) || exit 2
++fi
+
+ read -r center left right < <(python3 - "$workspace" "$profile" <<'PY'
+@@ -33,4 +64,8 @@
+ docker start "$container" >/dev/null
+ docker exec "$container" sh -c 'test -e /ros2_ws || ln -s /work /ros2_ws'
++if [[ -n "$autonomy_config" ]] && ! docker exec "$container" test -r "$autonomy_config"; then
++    echo "Autonomy parameters are unavailable in $container at $autonomy_config." >&2
++    exit 2
++fi
+ if docker exec "$container" pgrep -f \
+     '/vesc_tool_7[.]00|/vesc_driver_node|/car_drive/(drive_node|steering_node)' >/dev/null; then
+@@ -45,4 +80,24 @@
+ preview=true
+ if [[ "$mode" == --hardware ]]; then
++    if [[ -n "$autonomy_config" ]] && ! docker exec -i "$container" bash -lc '
++        set -e
++        source /opt/ros/jazzy/setup.bash
++        source /ros2_ws/install/setup.bash
++        exec python3 - "$1"
++    ' bash "$autonomy_config" <<'PY'
++import sys
++import yaml
++
++from car_drive.autonomy_node import load_autonomy_config
++
++try:
++    load_autonomy_config(sys.argv[1])
++except (OSError, ValueError, yaml.YAMLError) as error:
++    sys.exit(str(error))
++PY
++    then
++        echo 'Autonomy preflight failed. Build car_drive and verify the calibration parameters before connecting to the VESC.' >&2
++        exit 2
++    fi
+     if [[ ! -e "$device" ]]; then
+         echo 'VESC USB device is absent. Connect and power the controller.' >&2
+@@ -131,4 +186,7 @@
+                  "steering_center:=$center" "steering_left:=$left" "steering_right:=$right"
+                  "max_erpm:=$max_erpm" "max_reverse_erpm:=$max_reverse_erpm")
++    if [[ -n "$autonomy_config" ]]; then
++        launch_args+=("autonomy_config:=$autonomy_config")
++    fi
+ fi
+ docker exec "${exec_args[@]}" -e ROS_DOMAIN_ID="$domain" "$container" bash -lc \

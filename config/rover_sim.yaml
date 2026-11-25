@@ -4,8 +4,8 @@ steering_position_gain: 4.0
 # RACECAR/J FlatNose distance between front and rear axle centers.
 wheelbase_m: 0.324
 
-# Hokuyo UST-10LX has a 25 ms scan period.
-lidar_scan_rate_hz: 40
+# Simulation update rate for the oval. The UST-10LX hardware scans at 40 Hz.
+lidar_scan_rate_hz: 20
 
 # RGB and depth frame rate when a viewer or another consumer requests them.
 camera_update_rate_hz: 5

@@ -1,0 +1,16 @@
+autonomy_node:
+  ros__parameters:
+    wheelbase_m: 0.324
+    # Measure ERPM per m/s and both effective wheel angles before enabling.
+    # Zero deliberately refuses to start.
+    erpm_per_mps: 0.0
+    left_angle_rad: 0.0
+    right_angle_rad: 0.0
+    max_speed_mps: 0.15
+    overspeed_margin_mps: 0.05
+    odom_topic: /odom
+    command_timeout_s: 0.35
+    scan_timeout_s: 0.30
+    odom_timeout_s: 0.30
+    driver_timeout_s: 0.80
+    guard_status_timeout_s: 1.25
