@@ -23,8 +23,13 @@ find_package(xacro REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 install(
-  DIRECTORY src launch rviz config world meshes
+  DIRECTORY src launch config world meshes
   DESTINATION share/${PROJECT_NAME}
+)
+
+install(
+  FILES oval_nav2/oval_paths.rviz
+  DESTINATION share/${PROJECT_NAME}/rviz
 )
 
 if(BUILD_TESTING)

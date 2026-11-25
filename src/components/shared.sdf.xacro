@@ -7,21 +7,35 @@
     <xacro:property name="wheel_radius" value="0.0523875"/>
     <xacro:property name="wheel_width" value="0.041275"/>
     <xacro:property name="wheel_ygap" value="0.03413125"/>
+    <!-- Match the published span at the rendered tire sidewalls. -->
+    <xacro:property name="tire_visual_span" value="0.296"/>
+    <xacro:property name="wheel_visual_y_offset" value="${(tire_visual_span - base_width - 2*wheel_ygap - wheel_width)/2}"/>
     <xacro:property name="wheel_zoff" value="0.0413125"/>
-    <xacro:property name="wheel_xoff" value="0.1651"/>
-    <xacro:property name="vehicle_length" value="0.536575"/>
+    <xacro:property name="wheel_xoff" value="${rover_sim.wheelbase_m / 2}"/>
+    <xacro:property name="vehicle_length" value="0.5461"/>
     <xacro:property name="lidar_x" value="0.1762125"/>
     <xacro:property name="lidar_scan_height" value="0.1755"/>
-    <xacro:property name="camera_x" value="0.215"/>
-    <xacro:property name="camera_height" value="0.1437"/>
+    <xacro:property name="lidar_mount_z" value="${lidar_scan_height - (wheel_radius+wheel_zoff)}"/>
+    <xacro:property name="lidar_body_center_z" value="-0.020"/>
+    <xacro:property name="lidar_body_height" value="0.07"/>
     <xacro:property name="lower_deck_length" value="0.381"/>
     <xacro:property name="lower_deck_width" value="0.1778"/>
     <xacro:property name="upper_deck_length" value="0.3302"/>
     <xacro:property name="upper_deck_width" value="0.1397"/>
     <xacro:property name="deck_thickness" value="0.0049022"/>
-    <xacro:property name="lower_deck_z" value="0.02425"/>
-    <xacro:property name="upper_deck_z" value="0.0623"/>
+    <!-- The kit uses two-inch standoffs. Seat the stack below the Hokuyo scan plane. -->
+    <xacro:property name="deck_standoff_length" value="0.0508"/>
+    <xacro:property name="lower_deck_z" value="0.0218"/>
+    <xacro:property name="upper_deck_z" value="${lower_deck_z + deck_thickness + deck_standoff_length}"/>
     <xacro:property name="upper_deck_x" value="-0.014"/>
+    <xacro:property name="upper_deck_top" value="${upper_deck_z + deck_thickness/2}"/>
+    <!-- Retain the photo-based camera pose and fit the post to the upper deck. -->
+    <xacro:property name="camera_x" value="0.135"/>
+    <xacro:property name="camera_body_height" value="0.025"/>
+    <xacro:property name="camera_tab_thickness" value="0.005"/>
+    <xacro:property name="camera_mount_z" value="0.1162511"/>
+    <xacro:property name="camera_tab_top" value="${upper_deck_top + camera_tab_thickness}"/>
+    <xacro:property name="camera_post_height" value="${camera_mount_z - camera_body_height/2 - camera_tab_top}"/>
   <xacro:property name="max_steer" value="0.6"/>
 
   <!-- Shared inertial macros. -->

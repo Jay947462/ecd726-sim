@@ -33,10 +33,12 @@ ekf_filter_node:
         world_frame: odom           # Defaults to the value of odom_frame if unspecified
         
         odom0: demo/odom
+# Wheel twist is measured at the rear axle. Transform it to base_link for
+# forward and lateral velocity, and use the IMU alone for yaw rate.
         odom0_config: [false, false, false,
                        false, false, false,
                        true, true, false,
-                       false, false, true,
+                       false, false, false,
                        false, false, false]
 
         imu0: demo/imu

@@ -1,0 +1,6 @@
+/build/
+/install/
+/log/
+__pycache__/
+*.pyc
+/oval_nav2/blocked_scan.json

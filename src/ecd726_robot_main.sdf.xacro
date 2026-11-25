@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf xmlns:xacro="http://www.ros.org/wiki/xacro" version="1.8">
+  <xacro:property name="rover_sim" value="${xacro.load_yaml('../config/rover_sim.yaml')}" lazy_eval="false"/>
+
   <!-- Shared properties and inertia macros -->
   <xacro:include filename="components/shared.sdf.xacro"/>
 

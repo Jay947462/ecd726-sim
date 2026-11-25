@@ -5,12 +5,13 @@
     <joint name="lidar_joint" type="fixed">
       <parent>base_link</parent>
       <child>lidar_link</child>
-      <pose relative_to="base_link">${lidar_x} 0.0 ${lidar_scan_height - (wheel_radius+wheel_zoff)} 0 0 0</pose>
+      <pose relative_to="base_link">${lidar_x} 0.0 ${lidar_mount_z} 0 0 0</pose>
     </joint>
     <link name="lidar_link">
       <pose relative_to="lidar_joint"/>
       <visual name="lidar_link_visual">
-        <pose>0 0 -0.020 0 0 0</pose>
+        <!-- The mesh origin is at the bottom of the housing. -->
+        <pose>0 0 ${lidar_body_center_z-lidar_body_height/2} 0 0 0</pose>
         <material>
           <ambient>0.20 0.23 0.26 1</ambient>
           <diffuse>0.30 0.33 0.36 1</diffuse>
@@ -35,18 +36,18 @@
         </material>
       </visual>
       <collision name="lidar_link_collision">
-        <pose>0 0 -0.020 0 0 0</pose>
+        <pose>0 0 ${lidar_body_center_z} 0 0 0</pose>
         <geometry>
           <box>
-            <size>0.05 0.05 0.07</size>
+            <size>0.05 0.05 ${lidar_body_height}</size>
           </box>
         </geometry>
       </collision>
-      <xacro:box_inertia m="0.125" w="0.05" d="0.05" h="0.07"/>
+      <xacro:box_inertia m="0.125" w="0.05" d="0.05" h="${lidar_body_height}"/>
       <sensor name="lidar" type="gpu_lidar">
         <always_on>true</always_on>
         <visualize>false</visualize>
-        <update_rate>15</update_rate>
+        <update_rate>${rover_sim.lidar_scan_rate_hz}</update_rate>
         <topic>scan</topic>
         <gz_frame_id>lidar_link</gz_frame_id>
         <ray>

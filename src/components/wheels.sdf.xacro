@@ -5,7 +5,7 @@
       <link name="${prefix}_link">
         <pose relative_to="base_link">${x_reflect*wheel_xoff} ${y_reflect*(base_width/2+wheel_ygap)} ${-wheel_zoff} 0 0 0</pose>
         <visual name="${prefix}_link_visual">
-          <pose relative_to="${prefix}_link">0 0 0 ${pi/2} 0 0</pose>
+          <pose relative_to="${prefix}_link">0 ${y_reflect*wheel_visual_y_offset} 0 ${pi/2} 0 0</pose>
           <geometry>
             <cylinder>
               <radius>${wheel_radius}</radius>
@@ -18,7 +18,7 @@
           </material>
         </visual>
         <visual name="${prefix}_outer_hub_visual">
-          <pose>0 ${y_reflect*(wheel_width/2 + 0.001)} 0 ${pi/2} 0 0</pose>
+          <pose>0 ${y_reflect*(wheel_visual_y_offset + wheel_width/2 + 0.001)} 0 ${pi/2} 0 0</pose>
           <geometry>
             <cylinder>
               <radius>${wheel_radius*0.46}</radius>
@@ -74,7 +74,7 @@
       <link name="${prefix}_link">
         <pose relative_to="${prefix}_steer_link">0 0 0 0 0 0</pose>
         <visual name="${prefix}_link_visual">
-          <pose relative_to="${prefix}_link">0 0 0 ${pi/2} 0 0</pose>
+          <pose relative_to="${prefix}_link">0 ${y_reflect*wheel_visual_y_offset} 0 ${pi/2} 0 0</pose>
           <geometry>
             <cylinder>
               <radius>${wheel_radius}</radius>
@@ -87,7 +87,7 @@
           </material>
         </visual>
         <visual name="${prefix}_outer_hub_visual">
-          <pose>0 ${y_reflect*(wheel_width/2 + 0.001)} 0 ${pi/2} 0 0</pose>
+          <pose>0 ${y_reflect*(wheel_visual_y_offset + wheel_width/2 + 0.001)} 0 ${pi/2} 0 0</pose>
           <geometry>
             <cylinder>
               <radius>${wheel_radius*0.46}</radius>
@@ -136,6 +136,7 @@
       <right_steering_joint>steer_r_steer_joint</right_steering_joint>
       <kingpin_width>${base_width + 2*wheel_ygap}</kingpin_width>
       <steering_limit>${max_steer}</steering_limit>
+      <steer_p_gain>${rover_sim.steering_position_gain}</steer_p_gain>
       <wheel_base>${2*wheel_xoff}</wheel_base>
       <wheel_separation>${base_width + 2*wheel_ygap}</wheel_separation>
       <wheel_radius>${wheel_radius}</wheel_radius>
@@ -147,7 +148,7 @@
       <odom_topic>/demo/odom</odom_topic>
       <tf_topic>/demo/gz_tf</tf_topic>
       <frame_id>odom</frame_id>
-      <child_frame_id>base_link</child_frame_id>
+      <child_frame_id>rear_axle</child_frame_id>
     </plugin>
     <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
       <topic>joint_states</topic>

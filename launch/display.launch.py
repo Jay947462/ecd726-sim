@@ -9,6 +9,7 @@ from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 from ros_gz_bridge.actions import RosGzBridge
 from ros_gz_sim.actions import GzServer
+import yaml
 
 
 def generate_launch_description():
@@ -16,9 +17,11 @@ def generate_launch_description():
     ros_gz_sim_share = get_package_share_directory('ros_gz_sim')
     gz_spawn_model_launch_source = os.path.join(ros_gz_sim_share, "launch", "gz_spawn_model.launch.py")
     default_model_path = os.path.join(pkg_share, 'src', 'ecd726_robot_main.sdf.xacro')
-    default_rviz_config_path = os.path.join(pkg_share, 'rviz', 'config.rviz')
+    default_rviz_config_path = os.path.join(pkg_share, 'rviz', 'oval_paths.rviz')
     world_path = os.path.join(pkg_share, 'world', 'ecd726_oval_track.sdf')
     bridge_config_path = os.path.join(pkg_share, 'config', 'bridge_config.yaml')
+    with open(os.path.join(pkg_share, 'config', 'rover_sim.yaml'), encoding='utf-8') as config:
+        rear_axle_x = -yaml.safe_load(config)['wheelbase_m'] / 2
 
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
@@ -64,6 +67,15 @@ def generate_launch_description():
             'y': '2.0',
         }.items(),
     )
+    rear_axle_tf = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='rear_axle_tf',
+        arguments=[
+            '--x', str(rear_axle_x), '--frame-id', 'base_link', '--child-frame-id', 'rear_axle',
+        ],
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
+    )
     robot_localization_node = Node(
         package='robot_localization',
         executable='ekf_node',
@@ -82,5 +94,6 @@ def generate_launch_description():
         gz_server,
         ros_gz_bridge,
         spawn_entity,
+        rear_axle_tf,
         robot_localization_node,
     ])

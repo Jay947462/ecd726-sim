@@ -5,12 +5,12 @@
     <joint name="camera_joint" type="fixed">
       <parent>base_link</parent>
       <child>camera_link</child>
-      <pose relative_to="base_link">${camera_x} 0 ${camera_height - (wheel_radius+wheel_zoff)} 0 0 0</pose>
+      <pose relative_to="base_link">${camera_x} 0 ${camera_mount_z} 0 0 0</pose>
     </joint>
     <link name="camera_link">
       <pose relative_to="camera_joint"/>
       <visual name="camera_link_visual">
-        <pose>0.0149 -0.0175 0 ${pi/2} 0 ${pi/2}</pose>
+        <pose>0.0149 0 0 ${pi/2} 0 ${pi/2}</pose>
         <geometry>
           <mesh>
             <uri>file://$(find ecd726_description)/meshes/realsense_d435.stl</uri>
@@ -25,15 +25,15 @@
       <collision name="camera_link_collision">
         <geometry>
           <box>
-            <size>0.025 0.090 0.025</size>
+            <size>0.025 0.090 ${camera_body_height}</size>
           </box>
         </geometry>
       </collision>
-      <xacro:box_inertia m="0.035" w="0.090" d="0.025" h="0.025"/>
+      <xacro:box_inertia m="0.035" w="0.090" d="0.025" h="${camera_body_height}"/>
       <sensor name="d435i_depth" type="depth_camera">
-        <always_on>true</always_on>
+        <always_on>false</always_on>
         <visualize>false</visualize>
-        <update_rate>15</update_rate>
+        <update_rate>${rover_sim.camera_update_rate_hz}</update_rate>
         <topic>/d435i/depth/image_raw</topic>
         <gz_frame_id>camera_link</gz_frame_id>
         <camera name="d435i_depth_camera">
@@ -50,9 +50,9 @@
         </camera>
       </sensor>
       <sensor name="d435i_color" type="camera">
-        <always_on>true</always_on>
+        <always_on>false</always_on>
         <visualize>false</visualize>
-        <update_rate>15</update_rate>
+        <update_rate>${rover_sim.camera_update_rate_hz}</update_rate>
         <topic>/d435i/color/image_raw</topic>
         <gz_frame_id>camera_link</gz_frame_id>
         <camera name="d435i_rgb_camera">

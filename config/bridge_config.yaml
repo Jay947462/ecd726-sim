@@ -38,32 +38,38 @@
   gz_type_name: "gz.msgs.LaserScan"
   direction: GZ_TO_ROS
   
+# Subscribe in Gazebo only while a ROS consumer requests camera data.
 - ros_topic_name: "/d435i/color/image_raw"
   gz_topic_name: "/d435i/color/image_raw"
   ros_type_name: "sensor_msgs/msg/Image"
   gz_type_name: "gz.msgs.Image"
   direction: GZ_TO_ROS
+  lazy: true
 
 - ros_topic_name: "/d435i/color/camera_info"
   gz_topic_name: "/d435i/color/camera_info"
   ros_type_name: "sensor_msgs/msg/CameraInfo"
   gz_type_name: "gz.msgs.CameraInfo"
   direction: GZ_TO_ROS
+  lazy: true
 
 - ros_topic_name: "/d435i/depth/image_raw"
   gz_topic_name: "/d435i/depth/image_raw"
   ros_type_name: "sensor_msgs/msg/Image"
   gz_type_name: "gz.msgs.Image"
   direction: GZ_TO_ROS
+  lazy: true
 
 - ros_topic_name: "/d435i/depth/camera_info"
   gz_topic_name: "/d435i/depth/camera_info"
   ros_type_name: "sensor_msgs/msg/CameraInfo"
   gz_type_name: "gz.msgs.CameraInfo"
   direction: GZ_TO_ROS
+  lazy: true
 
 - ros_topic_name: "/d435i/depth/points"
   gz_topic_name: "/d435i/depth/image_raw/points"
   ros_type_name: "sensor_msgs/msg/PointCloud2"
   gz_type_name: "gz.msgs.PointCloudPacked"
   direction: GZ_TO_ROS
+  lazy: true
