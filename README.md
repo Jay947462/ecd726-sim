@@ -13,9 +13,17 @@ them to ERPM and steering commands. The initial profile is forward-only, caps
 speed at 0.15 m/s and starts disarmed. A stop or loss of a required input latches
 the guarded stop. The ROS software stop releases current and the car coasts.
 
-Start from your team's existing `ECD726-CAR` checkout on the Jetson. The overlay
-uses that workspace's VESC driver, firmware preparation helper and Foxglove
-dashboard. This example assumes the host checkout is `$HOME/ros2_ws`.
+The physical VESC driver workspace and Foxglove dashboard are maintained in
+[Kenou2005/ECD726-CAR](https://github.com/Kenou2005/ECD726-CAR). Use your existing
+checkout on the Jetson. On a fresh Jetson, authenticate to that GitHub
+repository and clone it as the host workspace.
+
+```bash
+git clone https://github.com/Kenou2005/ECD726-CAR.git "$HOME/ros2_ws"
+```
+
+From that workspace, add this branch and apply the guarded autonomy overlay.
+These commands assume the host workspace is `$HOME/ros2_ws`.
 
 ```bash
 cd "$HOME/ros2_ws"
