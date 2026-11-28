@@ -1,10 +1,34 @@
 # ECD 726 FlatNose rover
 
-This repository contains the RACECAR/J FlatNose simulation and the physical oval
-integration for a Jetson Orin Nano. The simulator uses Ubuntu 24.04, ROS 2 Jazzy
-and Gazebo Harmonic. On the Jetson, Jazzy runs in the existing Docker workspace.
+This repository contains the RACECAR/J FlatNose simulator and its Jetson Orin
+Nano integration for track learning and known-oval driving. The simulator
+uses Ubuntu 24.04, ROS 2 Jazzy and Gazebo Harmonic. On the Jetson, Jazzy runs
+in the existing Docker workspace.
 
-## Jetson Orin Nano and Foxglove
+## Learn a physical track on the Jetson
+
+The track-learning mode starts with a fresh map. It learns a single closed
+corridor from LiDAR-visible boundaries and saves the map and route at the
+end of the first lap. The first hardware profile caps mapping at 0.10 m/s
+and replay at 0.15 m/s. The car stops after mapping so the operator can
+review the route and explicitly re-arm for replay.
+
+Follow the [Jetson track-learning guide](hardware_overlay/docs/TRACK_LEARNING.md)
+for the Docker and driver workspace setup, the calibrated LiDAR and odometry
+inputs, build commands, Foxglove, arming, and stop checks. On the Jetson,
+run the wall-clock launch with the measured turn radius.
+
+```bash
+ros2 launch ecd726_description learn_track_hardware.launch.py \
+  min_turn_radius:="${MEASURED_TURN_RADIUS_M:?Set the measured radius in metres}"
+```
+
+Start with USB-free ROS preview and a wheels-raised stop test. The physical
+workflow requires a calibrated odometry publisher and measured steering,
+footprint and stopping distance. The ROS stop releases motor current and the
+car coasts. Use the independent physical propulsion cutoff during floor tests.
+
+## Known oval on the Jetson
 
 The Jetson runs the oval planner, Nav2 and the VESC drive guards onboard. Nav2
 combines the physical map, odometry and LiDAR scan to generate drive commands.
@@ -27,7 +51,7 @@ These commands assume the host workspace is `$HOME/ros2_ws`.
 
 ```bash
 cd "$HOME/ros2_ws"
-git clone --branch feature/jetson-oval-autonomy --single-branch \
+git clone --branch feature/track-learning-robot --single-branch \
   https://github.com/Jay947462/ecd726-sim.git src/ecd726-sim
 bash src/ecd726-sim/hardware_overlay/apply.sh "$PWD"
 ```
@@ -36,10 +60,6 @@ Follow the [Jetson and Foxglove bring-up guide](hardware_overlay/docs/OVAL_AUTON
 for container setup, the USB-free manual preview, dashboard import, VESC and
 LiDAR checks, map and calibration, and autonomous arming. It also covers
 Foxglove monitoring during an onboard run and the SSH stop commands.
-
-The software stop, watchdogs and guarded flow were tested in ROS preview and
-Gazebo. Physical stopping distance, calibrated steering and speed, localization,
-and cone clearance must be checked on the car and course before autonomous laps.
 
 ## Build the simulator
 
@@ -94,3 +114,41 @@ To record metrics, start this in a separate terminal before the driver.
 python3 -B "$REPO/oval_nav2/record_oval_metrics.py" \
   --laps 3 --output-prefix "$HOME/ecd726-oval-ws/oval-run"
 ```
+
+## Learn an unknown track in Gazebo
+
+The learning mode starts online SLAM with live LiDAR and odometry. Closely
+spaced LiDAR-visible boundaries must define a single closed corridor. On the
+first lap the driver finds a forward path between the boundaries and checks
+space for the rover's footprint. It checks the return to the start and saves
+the learned map and a closed path. It may collect a short overlap past the
+start gate to align the map before recording. Later laps use the learned path
+as the reference for MPPI. SLAM keeps providing localization, and the driver
+uses live scans to steer around obstacles.
+
+Install SLAM Toolbox if needed, then rebuild the simulator as above.
+
+```bash
+sudo apt install ros-jazzy-slam-toolbox
+```
+
+End your current simulation before starting the learning session in the same
+ROS domain. In a sourced terminal, start the wall-only circle. Use `track:=oval` for the
+original oval with cones. Add `gui:=true` to see the run in Gazebo.
+
+```bash
+ros2 launch ecd726_description learn_track.launch.py track:=circle
+```
+
+In a second sourced terminal, set `REPO` as above and start the driver. Choose
+a new output directory for each run. The lap count includes the mapping lap.
+
+```bash
+python3 -B "$REPO/track_learning/drive.py" \
+  --laps 2 --output-dir "$HOME/learned-circle"
+```
+
+The defaults cap the mapping lap at 0.20 m/s and the later laps at 0.42 m/s.
+Press Ctrl+C in the driver terminal to stop. Each successful run writes
+`map.yaml`, `map.pgm`, `learned_route.json` and `run.json`. The saved route
+uses the SLAM map frame. This launch is for Gazebo and uses simulated time.

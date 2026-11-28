@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.8">
+  <world name="my_world">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu" />
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>false</shadows>
+      <grid>false</grid>
+    </scene>
+    <light name="sun" type="directional">
+      <cast_shadows>false</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="floor">
+        <collision name="floor">
+          <geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry>
+          <surface><friction><ode><mu>100</mu><mu2>50</mu2></ode></friction></surface>
+        </collision>
+        <visual name="floor_visual">
+          <geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry>
+          <material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- The circular lane has a 3 m centerline radius and about 1.29 m of clear width. -->
+    <model name="inner_boundary">
+      <static>true</static>
+      <pose>0 -1 0.225 0 0 0</pose>
+      <link name="wall">
+        <collision name="island">
+          <geometry><cylinder><radius>2.35349</radius><length>0.45</length></cylinder></geometry>
+        </collision>
+        <visual name="island_visual">
+          <geometry><cylinder><radius>2.35349</radius><length>0.45</length></cylinder></geometry>
+          <material><ambient>0.46 0.54 0.57 1</ambient><diffuse>0.46 0.54 0.57 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+    <model name="outer_boundary">
+      <static>true</static>
+      <pose>0 -1 0.225 0 0 0</pose>
+      <link name="wall">
+        <!-- Tangent boxes overlap to form a continuous collidable ring. -->
+        <collision name="segment_00">
+          <pose>3.67651 0 0 0 0 1.570796</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_00_visual">
+          <pose>3.67651 0 0 0 0 1.570796</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_01">
+          <pose>3.66252 0.320429 0 0 0 1.658063</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_01_visual">
+          <pose>3.66252 0.320429 0 0 0 1.658063</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_02">
+          <pose>3.620656 0.638419 0 0 0 1.745329</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_02_visual">
+          <pose>3.620656 0.638419 0 0 0 1.745329</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_03">
+          <pose>3.551236 0.951551 0 0 0 1.832596</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_03_visual">
+          <pose>3.551236 0.951551 0 0 0 1.832596</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_04">
+          <pose>3.454789 1.25744 0 0 0 1.919862</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_04_visual">
+          <pose>3.454789 1.25744 0 0 0 1.919862</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_05">
+          <pose>3.33205 1.55376 0 0 0 2.007129</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_05_visual">
+          <pose>3.33205 1.55376 0 0 0 2.007129</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_06">
+          <pose>3.183951 1.838255 0 0 0 2.094395</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_06_visual">
+          <pose>3.183951 1.838255 0 0 0 2.094395</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_07">
+          <pose>3.011621 2.10876 0 0 0 2.181662</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_07_visual">
+          <pose>3.011621 2.10876 0 0 0 2.181662</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_08">
+          <pose>2.81637 2.363215 0 0 0 2.268928</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_08_visual">
+          <pose>2.81637 2.363215 0 0 0 2.268928</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_09">
+          <pose>2.599685 2.599685 0 0 0 2.356194</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_09_visual">
+          <pose>2.599685 2.599685 0 0 0 2.356194</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_10">
+          <pose>2.363215 2.81637 0 0 0 2.443461</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_10_visual">
+          <pose>2.363215 2.81637 0 0 0 2.443461</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_11">
+          <pose>2.10876 3.011621 0 0 0 2.530727</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_11_visual">
+          <pose>2.10876 3.011621 0 0 0 2.530727</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_12">
+          <pose>1.838255 3.183951 0 0 0 2.617994</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_12_visual">
+          <pose>1.838255 3.183951 0 0 0 2.617994</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_13">
+          <pose>1.55376 3.33205 0 0 0 2.70526</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_13_visual">
+          <pose>1.55376 3.33205 0 0 0 2.70526</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_14">
+          <pose>1.25744 3.454789 0 0 0 2.792527</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_14_visual">
+          <pose>1.25744 3.454789 0 0 0 2.792527</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_15">
+          <pose>0.951551 3.551236 0 0 0 2.879793</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_15_visual">
+          <pose>0.951551 3.551236 0 0 0 2.879793</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_16">
+          <pose>0.638419 3.620656 0 0 0 2.96706</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_16_visual">
+          <pose>0.638419 3.620656 0 0 0 2.96706</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_17">
+          <pose>0.320429 3.66252 0 0 0 3.054326</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_17_visual">
+          <pose>0.320429 3.66252 0 0 0 3.054326</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_18">
+          <pose>0 3.67651 0 0 0 3.141593</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_18_visual">
+          <pose>0 3.67651 0 0 0 3.141593</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_19">
+          <pose>-0.320429 3.66252 0 0 0 -3.054326</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_19_visual">
+          <pose>-0.320429 3.66252 0 0 0 -3.054326</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_20">
+          <pose>-0.638419 3.620656 0 0 0 -2.96706</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_20_visual">
+          <pose>-0.638419 3.620656 0 0 0 -2.96706</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_21">
+          <pose>-0.951551 3.551236 0 0 0 -2.879793</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_21_visual">
+          <pose>-0.951551 3.551236 0 0 0 -2.879793</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_22">
+          <pose>-1.25744 3.454789 0 0 0 -2.792527</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_22_visual">
+          <pose>-1.25744 3.454789 0 0 0 -2.792527</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_23">
+          <pose>-1.55376 3.33205 0 0 0 -2.70526</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_23_visual">
+          <pose>-1.55376 3.33205 0 0 0 -2.70526</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_24">
+          <pose>-1.838255 3.183951 0 0 0 -2.617994</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_24_visual">
+          <pose>-1.838255 3.183951 0 0 0 -2.617994</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_25">
+          <pose>-2.10876 3.011621 0 0 0 -2.530727</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_25_visual">
+          <pose>-2.10876 3.011621 0 0 0 -2.530727</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_26">
+          <pose>-2.363215 2.81637 0 0 0 -2.443461</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_26_visual">
+          <pose>-2.363215 2.81637 0 0 0 -2.443461</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_27">
+          <pose>-2.599685 2.599685 0 0 0 -2.356194</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_27_visual">
+          <pose>-2.599685 2.599685 0 0 0 -2.356194</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_28">
+          <pose>-2.81637 2.363215 0 0 0 -2.268928</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_28_visual">
+          <pose>-2.81637 2.363215 0 0 0 -2.268928</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_29">
+          <pose>-3.011621 2.10876 0 0 0 -2.181662</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_29_visual">
+          <pose>-3.011621 2.10876 0 0 0 -2.181662</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_30">
+          <pose>-3.183951 1.838255 0 0 0 -2.094395</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_30_visual">
+          <pose>-3.183951 1.838255 0 0 0 -2.094395</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_31">
+          <pose>-3.33205 1.55376 0 0 0 -2.007129</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_31_visual">
+          <pose>-3.33205 1.55376 0 0 0 -2.007129</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_32">
+          <pose>-3.454789 1.25744 0 0 0 -1.919862</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_32_visual">
+          <pose>-3.454789 1.25744 0 0 0 -1.919862</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_33">
+          <pose>-3.551236 0.951551 0 0 0 -1.832596</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_33_visual">
+          <pose>-3.551236 0.951551 0 0 0 -1.832596</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_34">
+          <pose>-3.620656 0.638419 0 0 0 -1.745329</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_34_visual">
+          <pose>-3.620656 0.638419 0 0 0 -1.745329</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_35">
+          <pose>-3.66252 0.320429 0 0 0 -1.658063</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_35_visual">
+          <pose>-3.66252 0.320429 0 0 0 -1.658063</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_36">
+          <pose>-3.67651 0 0 0 0 -1.570796</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_36_visual">
+          <pose>-3.67651 0 0 0 0 -1.570796</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_37">
+          <pose>-3.66252 -0.320429 0 0 0 -1.48353</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_37_visual">
+          <pose>-3.66252 -0.320429 0 0 0 -1.48353</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_38">
+          <pose>-3.620656 -0.638419 0 0 0 -1.396263</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_38_visual">
+          <pose>-3.620656 -0.638419 0 0 0 -1.396263</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_39">
+          <pose>-3.551236 -0.951551 0 0 0 -1.308997</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_39_visual">
+          <pose>-3.551236 -0.951551 0 0 0 -1.308997</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_40">
+          <pose>-3.454789 -1.25744 0 0 0 -1.22173</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_40_visual">
+          <pose>-3.454789 -1.25744 0 0 0 -1.22173</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_41">
+          <pose>-3.33205 -1.55376 0 0 0 -1.134464</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_41_visual">
+          <pose>-3.33205 -1.55376 0 0 0 -1.134464</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_42">
+          <pose>-3.183951 -1.838255 0 0 0 -1.047198</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_42_visual">
+          <pose>-3.183951 -1.838255 0 0 0 -1.047198</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_43">
+          <pose>-3.011621 -2.10876 0 0 0 -0.959931</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_43_visual">
+          <pose>-3.011621 -2.10876 0 0 0 -0.959931</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_44">
+          <pose>-2.81637 -2.363215 0 0 0 -0.872665</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_44_visual">
+          <pose>-2.81637 -2.363215 0 0 0 -0.872665</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_45">
+          <pose>-2.599685 -2.599685 0 0 0 -0.785398</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_45_visual">
+          <pose>-2.599685 -2.599685 0 0 0 -0.785398</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_46">
+          <pose>-2.363215 -2.81637 0 0 0 -0.698132</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_46_visual">
+          <pose>-2.363215 -2.81637 0 0 0 -0.698132</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_47">
+          <pose>-2.10876 -3.011621 0 0 0 -0.610865</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_47_visual">
+          <pose>-2.10876 -3.011621 0 0 0 -0.610865</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_48">
+          <pose>-1.838255 -3.183951 0 0 0 -0.523599</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_48_visual">
+          <pose>-1.838255 -3.183951 0 0 0 -0.523599</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_49">
+          <pose>-1.55376 -3.33205 0 0 0 -0.436332</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_49_visual">
+          <pose>-1.55376 -3.33205 0 0 0 -0.436332</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_50">
+          <pose>-1.25744 -3.454789 0 0 0 -0.349066</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_50_visual">
+          <pose>-1.25744 -3.454789 0 0 0 -0.349066</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_51">
+          <pose>-0.951551 -3.551236 0 0 0 -0.261799</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_51_visual">
+          <pose>-0.951551 -3.551236 0 0 0 -0.261799</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_52">
+          <pose>-0.638419 -3.620656 0 0 0 -0.174533</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_52_visual">
+          <pose>-0.638419 -3.620656 0 0 0 -0.174533</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_53">
+          <pose>-0.320429 -3.66252 0 0 0 -0.087266</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_53_visual">
+          <pose>-0.320429 -3.66252 0 0 0 -0.087266</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_54">
+          <pose>0 -3.67651 0 0 0 0</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_54_visual">
+          <pose>0 -3.67651 0 0 0 0</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_55">
+          <pose>0.320429 -3.66252 0 0 0 0.087266</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_55_visual">
+          <pose>0.320429 -3.66252 0 0 0 0.087266</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_56">
+          <pose>0.638419 -3.620656 0 0 0 0.174533</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_56_visual">
+          <pose>0.638419 -3.620656 0 0 0 0.174533</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_57">
+          <pose>0.951551 -3.551236 0 0 0 0.261799</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_57_visual">
+          <pose>0.951551 -3.551236 0 0 0 0.261799</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_58">
+          <pose>1.25744 -3.454789 0 0 0 0.349066</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_58_visual">
+          <pose>1.25744 -3.454789 0 0 0 0.349066</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_59">
+          <pose>1.55376 -3.33205 0 0 0 0.436332</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_59_visual">
+          <pose>1.55376 -3.33205 0 0 0 0.436332</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_60">
+          <pose>1.838255 -3.183951 0 0 0 0.523599</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_60_visual">
+          <pose>1.838255 -3.183951 0 0 0 0.523599</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_61">
+          <pose>2.10876 -3.011621 0 0 0 0.610865</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_61_visual">
+          <pose>2.10876 -3.011621 0 0 0 0.610865</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_62">
+          <pose>2.363215 -2.81637 0 0 0 0.698132</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_62_visual">
+          <pose>2.363215 -2.81637 0 0 0 0.698132</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_63">
+          <pose>2.599685 -2.599685 0 0 0 0.785398</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_63_visual">
+          <pose>2.599685 -2.599685 0 0 0 0.785398</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_64">
+          <pose>2.81637 -2.363215 0 0 0 0.872665</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_64_visual">
+          <pose>2.81637 -2.363215 0 0 0 0.872665</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_65">
+          <pose>3.011621 -2.10876 0 0 0 0.959931</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_65_visual">
+          <pose>3.011621 -2.10876 0 0 0 0.959931</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_66">
+          <pose>3.183951 -1.838255 0 0 0 1.047198</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_66_visual">
+          <pose>3.183951 -1.838255 0 0 0 1.047198</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_67">
+          <pose>3.33205 -1.55376 0 0 0 1.134464</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_67_visual">
+          <pose>3.33205 -1.55376 0 0 0 1.134464</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_68">
+          <pose>3.454789 -1.25744 0 0 0 1.22173</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_68_visual">
+          <pose>3.454789 -1.25744 0 0 0 1.22173</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_69">
+          <pose>3.551236 -0.951551 0 0 0 1.308997</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_69_visual">
+          <pose>3.551236 -0.951551 0 0 0 1.308997</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_70">
+          <pose>3.620656 -0.638419 0 0 0 1.396263</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_70_visual">
+          <pose>3.620656 -0.638419 0 0 0 1.396263</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+        <collision name="segment_71">
+          <pose>3.66252 -0.320429 0 0 0 1.48353</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+        </collision>
+        <visual name="segment_71_visual">
+          <pose>3.66252 -0.320429 0 0 0 1.48353</pose>
+          <geometry><box><size>0.33504 0.06 0.45</size></box></geometry>
+          <material><ambient>0.32 0.37 0.43 1</ambient><diffuse>0.32 0.37 0.43 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

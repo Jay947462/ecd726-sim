@@ -21,3 +21,6 @@ calibration has zero placeholders and requires measurements from the car.
 
 The [Jetson bring-up guide](docs/OVAL_AUTONOMY.md) describes the build, manual
 Foxglove controls, autonomous monitoring, and stop checks.
+
+Use the [track-learning guide](docs/TRACK_LEARNING.md) for a fresh map and
+operator-reviewed handoff from the mapping lap to replay.

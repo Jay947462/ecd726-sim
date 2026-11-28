@@ -21,6 +21,7 @@ added_files=(
     src/car_drive/config/autonomy.hardware.yaml
     src/car_drive/test/test_autonomy_preview.py
     docs/OVAL_AUTONOMY.md
+    docs/TRACK_LEARNING.md
 )
 
 fail() {
